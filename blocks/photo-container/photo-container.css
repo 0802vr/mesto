@@ -1,0 +1,10 @@
+.photo-container {
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  border-radius: 10px;
+  align-items: baseline;
+  max-height: 361px;
+  
+}
