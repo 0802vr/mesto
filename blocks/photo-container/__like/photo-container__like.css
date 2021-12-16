@@ -11,7 +11,7 @@
  
 }
 .photo-container__like:hover {
-    opacity: .6;
+    opacity: .5;
     transition: opacity 1s linear;
     
 }

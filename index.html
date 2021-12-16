@@ -9,53 +9,53 @@
    <body>
       <div class="page">
          <header class="header">
-            <div class="header__logo"></div>
+            <div class="header__logo" ><img src="./image/logo_mesto.svg" alt="логотип"></div>
          </header>
          <main class="content">
             <section class="profile">
                <div class="profile__main-info">
-                  <img class="profile__avatar" src="./image/profile_image.png" alt="">
+                  <img class="profile__avatar" src="./image/profile_image.png" alt="аватар">
                   <div class="profile__info">
                      <div class="profile__name-header">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button type="button" class=profile__edit-button></button> 
+                        <button type="button" class="profile__edit-button"></button> 
                      </div>
-                     <div class="profile__job">Исследователь океана</div>
+                     <p class="profile__job">Исследователь океана</p>
                   </div>
                </div>
-               <button type="button" class="profile__add-button"></button> 
+               <button type="button" aria-label="добавить" class="profile__add-button"></button> 
             </section>
             <section class="photo-grid">
-               <div class="photo-container">
+               <article class="photo-container">
                   <img class="photo-container__img" src="./image/karachaevsk.png" alt="Карачаевск">
-                  <p class="photo-container__text">Карачаевск</p>
+                  <h2 class="photo-container__text">Карачаевск</h2>
                   <button type="button" class="photo-container__like"></button> 
-               </div>
-               <div class="photo-container">
+               </article>
+               <article class="photo-container">
                   <img class="photo-container__img" src="./image/ilbrus.png" alt="Эльбрус">
-                  <p class="photo-container__text">Гора Эльбрус</p>
+                  <h2 class="photo-container__text">Гора Эльбрус</h2>
                   <button type="button" class="photo-container__like"></button> 
-               </div>
-               <div class="photo-container">
+               </article>
+               <article class="photo-container">
                   <img class="photo-container__img" src="./image/dombai.png" alt="Домбай">
-                  <p class="photo-container__text">Домбай</p>
+                  <h2 class="photo-container__text">Домбай</h2>
                   <button type="button" class="photo-container__like"></button> 
-               </div>
-               <div class="photo-container">
+               </article>
+               <article class="photo-container">
                   <img class="photo-container__img" src="./image/ilbrus.png" alt="Эльбрус">
-                  <p class="photo-container__text">Гора Эльбрус</p>
+                  <h2 class="photo-container__text">Гора Эльбрус</h2>
                   <button type="button" class="photo-container__like"></button> 
-               </div>
-               <div class="photo-container">
+               </article>
+               <article class="photo-container">
                   <img class="photo-container__img" src="./image/dombai.png" alt="Домбай">
-                  <p class="photo-container__text">Домбай</p>
+                  <h2 class="photo-container__text">Домбай</h2>
                   <button type="button" class="photo-container__like"></button> 
-               </div>
-               <div class="photo-container">
+               </article>
+               <article class="photo-container">
                   <img class="photo-container__img" src="./image/karachaevsk.png" alt="Карачаевск">
-                  <p class="photo-container__text">Карачаево-Черкесия</p>
+                  <h2 class="photo-container__text">Карачаево-Черкесия</h2>
                   <button type="button" class="photo-container__like"></button> 
-               </div>
+               </article>
             </section>
          </main>
          <footer class="footer">
@@ -64,13 +64,13 @@
       </div>
       <div class="popup">
          <div class="popup__container">
-            <button class="popup__close-container"></button>
-            <form class='popup__form' action="#" >
-               <h2 class="popup__title">Редактировать профиль</h2>
+            <button type="button" class="popup__close-container"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class='popup__form' action="#" name="form" >
                <fieldset class="popup__fieldset">
-                  <input class="popup__input popup__input_name" type="text" maxlength="30" minlength="5" name="name" id="name-id" placeholder="Ваше Имя" required>
-                  <input class="popup__input popup__input_job" type="text" maxlength="50" minlength="5" name="job" id="job-id" placeholder="Чем Вы занимаетесь" required>
-                  <button  type='submit' class="popup__save" >Сохранить</button>
+                  <input class="popup__input popup__input_name_name" type="text" maxlength="30" minlength="5" name="name" id="name-id" placeholder="Ваше Имя" required>
+                  <input class="popup__input popup__input_name_job" type="text" maxlength="50" minlength="5" name="job" id="job-id" placeholder="Чем Вы занимаетесь" required>
+                  <button  type="submit" class="popup__save" >Сохранить</button>
                </fieldset>
             </form>
          </div>

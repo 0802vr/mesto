@@ -8,13 +8,6 @@
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 700;
-  src: local('Inter-Bold.otf'),
-  url(Inter-Bold.otf); 
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 900;
   src: local('Inter-Black.otf'),
   url(Inter-Black.otf); 

@@ -8,8 +8,8 @@ const popup = document.querySelector('.popup');
 const closeForm = popup.querySelector('.popup__close-container');
 let form =  document.querySelector('.popup__form');
 let fieldset = form.querySelector('.popup__fieldset');
-let nameInput = fieldset.querySelector('.popup__input_name');
-let jobInput = fieldset.querySelector('.popup__input_job');
+let nameInput = fieldset.querySelector('.popup__input_name_name');
+let jobInput = fieldset.querySelector('.popup__input_name_job');
 //функции и их вызов
 function addProfile(){
     nameInput.value = profileName.textContent;
@@ -21,10 +21,8 @@ function closePopup () {
 }
 function saveProfile(evt){
     evt.preventDefault();
-    let newName = nameInput.value;
-    let newJob = jobInput.value;
-    profileName.textContent = newName;
-    profileJob.textContent = newJob;
+    profileName.textContent = nameInput.value;
+    profileJob.textContent = jobInput.value;
     closePopup ()
 }
 //работа кнопок_добавить профиль_закрыть профиль_сохранить профиль

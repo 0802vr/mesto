@@ -1,6 +1,6 @@
 .popup__input {
     border: none;
-    border-bottom: 1px solid rgba(54, 54, 54, .7);
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
     margin-bottom: 30px;
     font-size: 14px;
     line-height: 17px;
@@ -9,7 +9,7 @@
     margin-left: auto;
     margin-right: auto;
 }
-.popup__input:nth-last-child(){
+.popup__input:nth-last-of-type(1){
     margin-bottom: 48px;
 
 }
@@ -19,7 +19,7 @@
     margin-left: 22px;
     margin-right: 22px;
 }
-.popup__input:nth-last-child(){
+.popup__input:nth-last-of-type(1){
     margin-bottom: 45px;
 
 }
