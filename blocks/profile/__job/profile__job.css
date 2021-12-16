@@ -10,7 +10,7 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: 336px;
-    text-align: center;
+    
     
 }
 @media screen and (max-width: 900px) {
@@ -19,6 +19,7 @@
     line-height: 16.94px;
     font-size: 14px;
     max-width: 282px;
+    text-align: center;
     
 }
 }
