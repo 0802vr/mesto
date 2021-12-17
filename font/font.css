@@ -12,3 +12,10 @@
   src: local('Inter-Black.otf'),
   url(Inter-Black.otf); 
 }
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Inter-Medium.otf'),
+  url(Inter-Medium.otf); 
+}
