@@ -25,44 +25,16 @@
                </div>
                <button type="button" aria-label="добавить" class="profile__add-button"></button> 
             </section>
-            <section class="photo-grid">
-               <article class="photo-container">
-                  <img class="photo-container__img" src="./image/karachaevsk.png" alt="Карачаевск">
-                  <h2 class="photo-container__text">Карачаевск</h2>
-                  <button type="button" class="photo-container__like"></button> 
-               </article>
-               <article class="photo-container">
-                  <img class="photo-container__img" src="./image/ilbrus.png" alt="Эльбрус">
-                  <h2 class="photo-container__text">Гора Эльбрус</h2>
-                  <button type="button" class="photo-container__like"></button> 
-               </article>
-               <article class="photo-container">
-                  <img class="photo-container__img" src="./image/dombai.png" alt="Домбай">
-                  <h2 class="photo-container__text">Домбай</h2>
-                  <button type="button" class="photo-container__like"></button> 
-               </article>
-               <article class="photo-container">
-                  <img class="photo-container__img" src="./image/ilbrus.png" alt="Эльбрус">
-                  <h2 class="photo-container__text">Гора Эльбрус</h2>
-                  <button type="button" class="photo-container__like"></button> 
-               </article>
-               <article class="photo-container">
-                  <img class="photo-container__img" src="./image/dombai.png" alt="Домбай">
-                  <h2 class="photo-container__text">Домбай</h2>
-                  <button type="button" class="photo-container__like"></button> 
-               </article>
-               <article class="photo-container">
-                  <img class="photo-container__img" src="./image/karachaevsk.png" alt="Карачаевск">
-                  <h2 class="photo-container__text">Карачаево-Черкесия</h2>
-                  <button type="button" class="photo-container__like"></button> 
-               </article>
+            <section class="card">
+               <div class="photo-grid">
+               </div>
             </section>
          </main>
          <footer class="footer">
             <p class="footer__copyright">&copy; 2021, Mesto Russia</p>
          </footer>
       </div>
-      <div class="popup">
+      <div class="popup popup_Edit">
          <div class="popup__container">
             <button type="button" class="popup__close-container"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -75,6 +47,34 @@
             </form>
          </div>
       </div>
+      <div class="popup popup_Add">
+         <div class="popup__container">
+            <button type="button" class="popup__close-container"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form popup__form_add" action="#" name="form" >
+               <fieldset class="popup__fieldset">
+                  <input class="popup__input popup__photo_type_name" type="text" maxlength="30"  placeholder="Место" required>
+                  <input class="popup__input popup__input_type_link" type="url"  placeholder="Ссылка" required>
+                  <button  type="submit" class="popup__save" >Сохранить</button>
+               </fieldset>
+            </form>
+         </div>
+      </div>
+      <div class="popup popup_photo">
+         <div class="popup__slider">
+            <button type="button" class="popup__close-container"></button>
+            <img  class="popup__img" src="#" alt="">
+            <p class="popup__text"></p>
+         </div>
+      </div>
+      <template class="template">
+         <div class="photo-container">
+         <img class="photo-container__img" src="#" alt="#">
+         <h2 class="photo-container__text"></h2>
+         <button type="button" class="photo-container__like"></button> 
+         <button type="button" class="photo-container__dlt"></button>
+         </div>
+      </template>
       <script src="./script/script.js"></script>
    </body>
 </html>

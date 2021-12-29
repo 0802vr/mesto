@@ -4,9 +4,9 @@
     background-image: url(../../../image/Close_Icon.svg);
     background-position: center;
     background-repeat: no-repeat;
-    left: 430px;
-    bottom: 30px;
-    position: relative;
+    right: -40px;
+    top: -45px;
+    position: absolute;
     border:none;
     background-color: rgba(0,0,0, .0);
     cursor: pointer;
@@ -20,8 +20,8 @@
 .popup__close-container {
     width: 20px;
     height: 20px;
-    left: 265px;
-    bottom: 30px;
+    right: -5px;
+    top: -25px;
     background-image: url(../../../image/Close_Icon_mobile.svg);
             
 }
