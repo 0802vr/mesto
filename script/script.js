@@ -99,10 +99,10 @@ function createCard (name, link)  {
 }
 function addCard (name, link)   {
      const newCard = createCard (name, link)
-      card.append (newCard)
+      card.prepend (newCard)
  }
 
-const cardNameInput = popupAdd.querySelector(".popup__photo_type_name")
+const cardNameInput = popupAdd.querySelector(".popup__input_type_name")
 const cardLinkInput = popupAdd.querySelector(".popup__input_type_link")
 const formAdd = popupAdd.querySelector(".popup__form_add")
 
