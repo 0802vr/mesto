@@ -1,154 +1,149 @@
 //все, что связано с профилем
 const profile = document.querySelector('.profile');
-let profileName = profile.querySelector('.profile__name');
-let profileJob = profile.querySelector('.profile__job');
+const profileName = profile.querySelector('.profile__name');
+const profileJob = profile.querySelector('.profile__job');
 const editButton = profile.querySelector('.profile__edit-button');
-//все, что связано с popup
-const popup = document.querySelector('.popup');
-const closeForm = popup.querySelector('.popup__close-container');
-let form =  document.querySelector('.popup__form');
-let fieldset = form.querySelector('.popup__fieldset');
-let nameInput = fieldset.querySelector('.popup__input_name_name');
-let jobInput = fieldset.querySelector('.popup__input_name_job');
-//функции и их вызов
-function editProfile(){
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-    popup.classList.add ('popup_opened');
-}
-function closePopup () {
-    popup.classList.remove ('popup_opened');
-}
-function saveProfile(evt){
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    closePopup ()
-}
-//работа кнопок_добавить профиль_закрыть профиль_сохранить профиль
-editButton.addEventListener ('click', editProfile);
-closeForm.addEventListener ('click', closePopup);
-form.addEventListener('submit', saveProfile);
-//спринт 5
-// добавлен массив фотографий
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
+//все, что связано с popup профилем
+const popupEdit = document.querySelector('.popup_edit');
+const closeForm = popupEdit.querySelector('.popup__close-container');
+const Profileform =  document.querySelector('.popup__form-edit');
+const fieldset = Profileform.querySelector('.popup__fieldset');
+const nameInput = fieldset.querySelector('.popup__input_name_name');
+const jobInput = fieldset.querySelector('.popup__input_name_job');
+//работа с темплом
 const template = document.querySelector('.template').content; //карта в темпле
 const card = document.querySelector('.photo-grid'); // список карт
-
-function renderCard () {
-    
-    initialCards.forEach( function (element){
-        templateClone = template.cloneNode(true);//клонировали карту
-        templateClone.querySelector(".photo-container__img").src = element.link;
-        templateClone.querySelector(".photo-container__img").alt = element.name;
-        templateClone.querySelector(".photo-container__text").textContent = element.name;
-        action (templateClone)
-        card.append (templateClone)
-    })
-}
-renderCard ();//функция для карт
-
+//работа с формой карт
 const addButton = profile.querySelector('.profile__add-button');//выбрали кнопку добавления
-const popupAdd = document.querySelector('.popup_Add')
-
-function addProfile(){
-popupAdd.classList.add ('popup_opened');}//открытие попап карта
-
-addButton.addEventListener ('click', addProfile);
+const popupAdd = document.querySelector('.popup_add')//попап карты
 
 const closeFormAdd = popupAdd.querySelector('.popup__close-container');//закрытие попап карта
 
-function closeAddPopup () {
-popupAdd.classList.remove ('popup_opened');
+const cardNameInput = popupAdd.querySelector(".popup__input_type_name")//название места
+const cardLinkInput = popupAdd.querySelector(".popup__input_type_link")//ссылка на это место
+const formAdd = popupAdd.querySelector(".popup__form_add")// форма карт
+
+//для слайдов
+const slider = document.querySelector(".popup_photo");
+
+const sliderPhoto = slider.querySelector(".popup__img");
+const sliderText = slider.querySelector(".popup__text");
+
+const closeSlider = slider.querySelector('.popup__close-container');//закрытие попап карта
+
+//изначальный массив
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+function renderCard () {
+    
+  initialCards.forEach( function (element){
+      const el = createCard (element)
+      card.append (el)
+  })
 }
-closeFormAdd.addEventListener ('click', closeAddPopup);
-
-function createCard (name, link)  {
-    templateClone = template.cloneNode(true);//клонировали карту
-    templateClone.querySelector(".photo-container__img").src = link;
-    templateClone.querySelector(".photo-container__img").alt = name;
-    templateClone.querySelector(".photo-container__text").textContent = name;
-    action (templateClone)//место для ф-и лайка удаления просмотра фото
-    return templateClone
+renderCard ();//функция для карт
+//ф-я новой карты
+function createCard (element)  {
+  templateClone = template.cloneNode(true);//клонировали карту
+  templateClone.querySelector(".photo-container__img").src = element.link;
+  templateClone.querySelector(".photo-container__img").alt = element.name;
+  templateClone.querySelector(".photo-container__text").textContent = element.name;
+  setEventListeners (templateClone)//место для ф-и лайка удаления просмотра фото
+  return templateClone
 }
-function addCard (name, link)   {
-     const newCard = createCard (name, link)
-      card.prepend (newCard)
- }
-
-const cardNameInput = popupAdd.querySelector(".popup__input_type_name")
-const cardLinkInput = popupAdd.querySelector(".popup__input_type_link")
-const formAdd = popupAdd.querySelector(".popup__form_add")
-
- function saveAddCard(evt){
-    evt.preventDefault();
-    addCard(cardNameInput.value, cardLinkInput.value);
-    closeAddPopup ()}
-
-formAdd.addEventListener('submit', saveAddCard);///новая карта при клике
-
-///ф-я которая описывает лайк удаление и просмотр фото 
-function action (templateClone) {
-//лайки
-const likeBtn = templateClone.querySelector(".photo-container__like");
+//ф-я работы карты
+function setEventListeners (templateClone) {
+  const likeBtn = templateClone.querySelector(".photo-container__like");
+  const deleteBtn = templateClone.querySelector(".photo-container__dlt");
+  const photo = templateClone.querySelector('.photo-container__img'); 
+  const text = templateClone.querySelector('.photo-container__text'); 
+  //лайки карты
 function likeCard (){
 likeBtn.classList.toggle('photo-container__like_active')
 } 
 likeBtn.addEventListener('click', likeCard);
-//удаление
-const deleteBtn = templateClone.querySelector(".photo-container__dlt");
+//удаление карты
 function deleteCard (){
 deleteBtn.closest('.photo-container').remove();
 } 
 deleteBtn.addEventListener('click', deleteCard);
 //работа со слайдами
 
-const photo = templateClone.querySelector('.photo-container__img'); 
-const text = templateClone.querySelector('.photo-container__text'); 
-const slider = document.querySelector(".popup_photo");
 function addSlider(){
 
-const sliderPhoto = slider.querySelector(".popup__img");
-const sliderText = slider.querySelector(".popup__text");
 sliderPhoto.src = photo.src;
 sliderPhoto.alt = text.textContent;
 sliderText.textContent = sliderPhoto.alt
-slider.classList.add ('popup_opened');
-}//открытие попап карта
 
-photo.addEventListener ('click', addSlider);
-
-const closeSlider = slider.querySelector('.popup__close-container');//закрытие попап карта
-
-function closeSliderPopup () {
-slider.classList.remove ('popup_opened');
+openPopup (slider)
 }
-closeSlider.addEventListener ('click', closeSliderPopup);
+//открытие попап карта
+photo.addEventListener ('click', addSlider);
+//закрытие слайда
 
+
+//общие ф-и открыть и закрыть попап
+function openPopup (popup) {
+  popup.classList.add ('popup_opened');
+}
+function closePopup (popup) {
+  popup.classList.remove ('popup_opened');
+}
+//ф-я открыть форму профиля
+function editProfile(){
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup (popupEdit);
+}
+//ф-я сохранения нового профиля
+function saveProfile(evt){
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup (popupEdit);
+}
+//ф-я сохранения карты
+function saveAddCard(evt){
+  evt.preventDefault();
+  card.prepend(createCard({ link: cardLinkInput.value, name:cardNameInput.value, alt: cardNameInput.value}));
+  closePopup (popupAdd)
+}
+//обработчики работы с профилем
+editButton.addEventListener ('click', editProfile);//добавить
+closeForm.addEventListener ('click', function() {
+closePopup(popupEdit)});//закрыть
+Profileform.addEventListener('submit', saveProfile);//сохранить
+//обработчики работы с картами
+addButton.addEventListener ('click', function() {
+openPopup(popupAdd)});//добавить
+closeFormAdd.addEventListener ('click', function() {
+closePopup(popupAdd)});//закрыть
+formAdd.addEventListener('submit', saveAddCard);//сохранить
+//для закрытия слайда вынесен из ф-и
+closeSlider.addEventListener ('click', function() {
+  closePopup(slider)})
 }
