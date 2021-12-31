@@ -6,8 +6,8 @@ const editButton = profile.querySelector('.profile__edit-button');
 //все, что связано с popup профилем
 const popupEdit = document.querySelector('.popup_edit');
 const closeForm = popupEdit.querySelector('.popup__close-container');
-const Profileform =  document.querySelector('.popup__form-edit');
-const fieldset = Profileform.querySelector('.popup__fieldset');
+const profileForm =  document.querySelector('.popup__form-edit');
+const fieldset = profileForm.querySelector('.popup__fieldset');
 const nameInput = fieldset.querySelector('.popup__input_name_name');
 const jobInput = fieldset.querySelector('.popup__input_name_job');
 //работа с темплом
@@ -102,10 +102,8 @@ sliderText.textContent = sliderPhoto.alt
 openPopup (slider)
 }
 //открытие попап карта
-photo.addEventListener ('click', addSlider);
+photo.addEventListener ('click', addSlider);}
 //закрытие слайда
-
-
 //общие ф-и открыть и закрыть попап
 function openPopup (popup) {
   popup.classList.add ('popup_opened');
@@ -130,13 +128,14 @@ function saveProfile(evt){
 function saveAddCard(evt){
   evt.preventDefault();
   card.prepend(createCard({ link: cardLinkInput.value, name:cardNameInput.value, alt: cardNameInput.value}));
+  formAdd.reset()
   closePopup (popupAdd)
 }
 //обработчики работы с профилем
 editButton.addEventListener ('click', editProfile);//добавить
 closeForm.addEventListener ('click', function() {
 closePopup(popupEdit)});//закрыть
-Profileform.addEventListener('submit', saveProfile);//сохранить
+profileForm.addEventListener('submit', saveProfile);//сохранить
 //обработчики работы с картами
 addButton.addEventListener ('click', function() {
 openPopup(popupAdd)});//добавить
@@ -146,4 +145,3 @@ formAdd.addEventListener('submit', saveAddCard);//сохранить
 //для закрытия слайда вынесен из ф-и
 closeSlider.addEventListener ('click', function() {
   closePopup(slider)})
-}
