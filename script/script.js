@@ -25,11 +25,13 @@ const formAdd = popupAdd.querySelector(".popup__form_add")// форма карт
 
 //для слайдов
 const slider = document.querySelector(".popup_photo");
-
 const sliderPhoto = slider.querySelector(".popup__img");
 const sliderText = slider.querySelector(".popup__text");
-
 const closeSlider = slider.querySelector('.popup__close-container');//закрытие попап карта
+///overlay
+const overlayProfile = popupEdit.querySelector(".popup__overlay");
+const overlayPlace = popupAdd.querySelector(".popup__overlay");
+const overlayPhoto = slider.querySelector(".popup__overlay");
 
 //изначальный массив
 const initialCards = [
@@ -107,10 +109,20 @@ photo.addEventListener ('click', addSlider);}
 //общие ф-и открыть и закрыть попап
 function openPopup (popup) {
   popup.classList.add ('popup_opened');
+  document.addEventListener("keydown", keyHandler);
 }
 function closePopup (popup) {
   popup.classList.remove ('popup_opened');
+  document.removeEventListener("keydown", keyHandler);
 }
+function keyHandler(evt) {
+  
+    if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup (popup);
+  }
+} 
+
 //ф-я открыть форму профиля
 function editProfile(){
   nameInput.value = profileName.textContent;
@@ -144,4 +156,11 @@ closePopup(popupAdd)});//закрыть
 formAdd.addEventListener('submit', saveAddCard);//сохранить
 //для закрытия слайда вынесен из ф-и
 closeSlider.addEventListener ('click', function() {
-  closePopup(slider)})
+  closePopup(slider)});
+
+overlayProfile.addEventListener('click', function() {
+  closePopup(popupEdit)});
+overlayPlace.addEventListener('click', function() {
+  closePopup(popupAdd)});
+overlayPhoto.addEventListener('click', function() {
+  closePopup(slider)});
