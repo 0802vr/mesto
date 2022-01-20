@@ -33,46 +33,33 @@ const overlayProfile = popupEdit.querySelector(".popup__overlay");
 const overlayPlace = popupAdd.querySelector(".popup__overlay");
 const overlayPhoto = slider.querySelector(".popup__overlay");
 
-//изначальный массив
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 function renderCard () {
     
   initialCards.forEach( function (element){
-      const el = createCard (element)
-      card.append (el)
+    const el = createCard (element)
+    card.append (el)
   })
 }
 renderCard ();//функция для карт
+function likeCard (evt){
+  evt.target.classList.toggle('photo-container__like_active')
+} 
+function deleteCard (evt){
+  evt.target.closest('.photo-container').remove();
+}
+//работа со слайдами
+function openImagePopup(evt){
+  sliderPhoto.src = evt.target.src;
+  sliderPhoto.alt = evt.target.textContent;
+  sliderText.textContent = evt.target.alt
+  openPopup (slider)
+}
 //ф-я новой карты
 function createCard (element)  {
-  templateClone = template.cloneNode(true);//клонировали карту
-  templateClone.querySelector(".photo-container__img").src = element.link;
-  templateClone.querySelector(".photo-container__img").alt = element.name;
+  const templateClone = template.cloneNode(true);//клонировали карту
+  const templateCloneImg = templateClone.querySelector(".photo-container__img");
+  templateCloneImg.src = element.link;
+  templateCloneImg.alt = element.name;
   templateClone.querySelector(".photo-container__text").textContent = element.name;
   setEventListeners (templateClone)//место для ф-и лайка удаления просмотра фото
   return templateClone
@@ -82,29 +69,12 @@ function setEventListeners (templateClone) {
   const likeBtn = templateClone.querySelector(".photo-container__like");
   const deleteBtn = templateClone.querySelector(".photo-container__dlt");
   const photo = templateClone.querySelector('.photo-container__img'); 
-  const text = templateClone.querySelector('.photo-container__text'); 
-  //лайки карты
-function likeCard (){
-likeBtn.classList.toggle('photo-container__like_active')
-} 
-likeBtn.addEventListener('click', likeCard);
+   //лайки карты
+  likeBtn.addEventListener('click', likeCard);
 //удаление карты
-function deleteCard (){
-deleteBtn.closest('.photo-container').remove();
-} 
-deleteBtn.addEventListener('click', deleteCard);
-//работа со слайдами
-
-function addSlider(){
-
-sliderPhoto.src = photo.src;
-sliderPhoto.alt = text.textContent;
-sliderText.textContent = sliderPhoto.alt
-
-openPopup (slider)
-}
+  deleteBtn.addEventListener('click', deleteCard);
 //открытие попап карта
-photo.addEventListener ('click', addSlider);}
+photo.addEventListener ('click', openImagePopup);}
 //закрытие слайда
 //общие ф-и открыть и закрыть попап
 function openPopup (popup) {
@@ -117,10 +87,10 @@ function closePopup (popup) {
 }
 function keyHandler(evt) {
   
-    if (evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    closePopup (popup);
-  }
+  if (evt.key === 'Escape') {
+  const popup = document.querySelector('.popup_opened');
+  closePopup (popup);
+}
 } 
 
 //ф-я открыть форму профиля
@@ -140,27 +110,43 @@ function saveProfile(evt){
 function saveAddCard(evt){
   evt.preventDefault();
   card.prepend(createCard({ link: cardLinkInput.value, name:cardNameInput.value, alt: cardNameInput.value}));
-  formAdd.reset()
-  closePopup (popupAdd)
+  formAdd.reset();
+  closePopup (popupAdd);
+ 
+}
+function resetForm (formElement){
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));                               
+  inputList.forEach((inputElement) => {                                
+    hideInputError(formElement, inputElement);            
+});
+}
+function closePopupEdit(evt) {
+  closePopup(popupEdit, evt)
+  resetForm(popupEdit, evt)
+  
+}
+function closePopupAdd(evt) {
+closePopup(popupAdd, evt)
+resetForm(popupAdd, evt)
+formAdd.reset()
 }
 //обработчики работы с профилем
 editButton.addEventListener ('click', editProfile);//добавить
-closeForm.addEventListener ('click', function() {
-closePopup(popupEdit)});//закрыть
+closeForm.addEventListener ('click', closePopupEdit);//закрыть
 profileForm.addEventListener('submit', saveProfile);//сохранить
 //обработчики работы с картами
 addButton.addEventListener ('click', function() {
-openPopup(popupAdd)});//добавить
-closeFormAdd.addEventListener ('click', function() {
-closePopup(popupAdd)});//закрыть
+openPopup(popupAdd);
+const buttonAdd = popupAdd.querySelector(".popup__save");
+buttonAdd.disabled=true;
+buttonAdd.classList.add("popup__save_disabled");});//добавить
+closeFormAdd.addEventListener ('click', closePopupAdd);//закрыть
 formAdd.addEventListener('submit', saveAddCard);//сохранить
 //для закрытия слайда вынесен из ф-и
 closeSlider.addEventListener ('click', function() {
   closePopup(slider)});
 
-overlayProfile.addEventListener('click', function() {
-  closePopup(popupEdit)});
-overlayPlace.addEventListener('click', function() {
-  closePopup(popupAdd)});
+overlayProfile.addEventListener('click', closePopupEdit);
+overlayPlace.addEventListener('click', closePopupAdd);
 overlayPhoto.addEventListener('click', function() {
   closePopup(slider)});
