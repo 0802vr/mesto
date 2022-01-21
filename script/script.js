@@ -74,7 +74,7 @@ function setEventListeners (templateClone) {
 //удаление карты
   deleteBtn.addEventListener('click', deleteCard);
 //открытие попап карта
-photo.addEventListener ('click', openImagePopup);}
+  photo.addEventListener ('click', openImagePopup);}
 //закрытие слайда
 //общие ф-и открыть и закрыть попап
 function openPopup (popup) {
@@ -130,16 +130,18 @@ closePopup(popupAdd, evt)
 resetForm(popupAdd, evt)
 formAdd.reset()
 }
+function disableSubmitBtn(submitBtnElement){
+  submitBtnElement.disabled=true;
+  submitBtnElement.classList.add("popup__save_disabled");}
 //обработчики работы с профилем
 editButton.addEventListener ('click', editProfile);//добавить
 closeForm.addEventListener ('click', closePopupEdit);//закрыть
 profileForm.addEventListener('submit', saveProfile);//сохранить
 //обработчики работы с картами
 addButton.addEventListener ('click', function() {
-openPopup(popupAdd);
-const buttonAdd = popupAdd.querySelector(".popup__save");
-buttonAdd.disabled=true;
-buttonAdd.classList.add("popup__save_disabled");});//добавить
+  openPopup(popupAdd);
+  const buttonAdd = popupAdd.querySelector(".popup__save");
+  disableSubmitBtn(buttonAdd);});//добавить
 closeFormAdd.addEventListener ('click', closePopupAdd);//закрыть
 formAdd.addEventListener('submit', saveAddCard);//сохранить
 //для закрытия слайда вынесен из ф-и
