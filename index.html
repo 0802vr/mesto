@@ -25,9 +25,8 @@
                </div>
                <button type="button" aria-label="добавить" class="profile__add-button"></button> 
             </section>
-            <section class="card">
-               <div class="photo-grid">
-               </div>
+            <section class="photo-grid">
+               
             </section>
          </main>
          <footer class="footer">
@@ -74,7 +73,7 @@
             <p class="popup__text"></p>
          </div>
       </div>
-      <template class="template">
+      <template class="template" id="card-template">
          <div class="photo-container">
          <img class="photo-container__img" src="#" alt="#">
          <h2 class="photo-container__text"></h2>
@@ -82,8 +81,8 @@
          <button type="button" class="photo-container__dlt"></button>
          </div>
       </template>
-      <script src="./script/initialCards.js"></script>
-      <script src="./script/validate.js"></script>
-      <script src="./script/script.js"></script>
+      <script type ="module" src="./script/Cards.js"></script>
+      <script type ="module" src="./script/validate.js"></script>
+      <script type ="module" src="./script/index.js"></script>
       </body>
 </html>
