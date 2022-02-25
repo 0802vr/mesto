@@ -56,7 +56,7 @@ closePopup(popupAdd, evt)
 formAdd.reset()
 }
 
- 
+ const el
 //обработчики работы с профилем
 editButton.addEventListener ('click', editProfile);//добавить
 closeForm.addEventListener ('click', closePopupEdit);//закрыть
