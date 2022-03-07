@@ -2,17 +2,17 @@ export class Section {
     constructor({items,renders}, conteinerSelector) {
         this._items = items;
         this._renders = renders;
-        this._conteinerSelector = conteinerSelector;
+        this._conteiner = conteinerSelector;
     }
 
   //функция добавления в dom
   addItems(card) {
-    this._conteinerSelector.prepend((card))
+    this._conteiner.prepend((card))
     }
 //функция обхода исходного массива и добавления на страницу
   renderItems() { 
     this._items.forEach((data) => {
-        this._conteinerSelector.prepend(this._renders(data))})    
+        this.addItems(this._renders(data))})    
     }  
        
 } 

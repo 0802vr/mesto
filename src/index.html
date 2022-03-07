@@ -3,6 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+       
       <title>Место</title>
    </head>
    <body>
@@ -39,9 +40,9 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class='popup__form popup__form-edit' id="edit-form" action="#" name="form">
                <fieldset class="popup__fieldset">
-                  <input class="popup__input popup__input_name_name" id="name-input" type="text" maxlength="40" minlength="2" name="form1"  placeholder="Ваше Имя" required>
+                  <input class="popup__input popup__input_name_name" id="name-input" type="text" maxlength="40" minlength="2" name="inputFormName"  placeholder="Ваше Имя" required>
                   <span class="popup__error" id="name-input-error"></span>
-                  <input class="popup__input popup__input_name_job" id="job-input"type="text" maxlength="200" minlength="2" name="form2"  placeholder="Чем Вы занимаетесь" required>
+                  <input class="popup__input popup__input_name_job" id="job-input"type="text" maxlength="200" minlength="2" name="inputFormAddition"  placeholder="Чем Вы занимаетесь" required>
                   <span class="popup__error" id="job-input-error"></span>
                   <button  type="submit" class="popup__save" >Сохранить</button>
                </fieldset>
@@ -55,9 +56,9 @@
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__form popup__form_add" action="#" name="form">
                <fieldset class="popup__fieldset">
-                  <input class="popup__input popup__input_type_name" id="card-input" name="form1" type="text" maxlength="30" minlength="2" placeholder="Место" required>
+                  <input class="popup__input popup__input_type_name" id="card-input" name="inputFormName" type="text" maxlength="30" minlength="2" placeholder="Место" required>
                   <span class="popup__error" id="card-input-error"></span>
-                  <input class="popup__input popup__input_type_link" id="link-input" name="form2" type="url"  placeholder="Ссылка" required>
+                  <input class="popup__input popup__input_type_link" id="link-input" name="inputFormAddition" type="url"  placeholder="Ссылка" required>
                   <span class="popup__error" id="link-input-error"></span>
                   <button  type="submit" class="popup__save" >Сохранить</button>
                </fieldset>
@@ -80,5 +81,6 @@
          <button type="button" class="photo-container__dlt"></button>
          </div>
       </template>
+       
       </body>
 </html>
