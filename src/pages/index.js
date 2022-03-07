@@ -63,7 +63,7 @@ section.renderItems();
 
 //ф-я открыть форму профиля
 function openEditProfile() {
-  let newUnfoValueUser = unfoValueUser.getUserInfo();
+  const newUnfoValueUser = unfoValueUser.getUserInfo();
   inputName.value = newUnfoValueUser.name;
   inputJob.value = newUnfoValueUser.info;
   editFormValidator.resetValidForm();

@@ -1,8 +1,8 @@
 export class Section {
-    constructor({items,renders}, conteinerSelector) {
+    constructor({items,renders}, conteiner) {
         this._items = items;
         this._renders = renders;
-        this._conteiner = conteinerSelector;
+        this._conteiner = conteiner;
     }
 
   //функция добавления в dom
