@@ -1,86 +1,128 @@
 <!DOCTYPE html>
 <html class="root" lang="ru">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-       
-      <title>Место</title>
-   </head>
-   <body>
-      <div class="page">
-         <header class="header">
-            <div class="header__logo" ></div>
-         </header>
-         <main class="content">
-            <section class="profile">
-               <div class="profile__main-info">
-                  <img class="profile__avatar" src="<%=require('./image/profile_image.png')%>" alt="аватар"> 
-                  <div class="profile__info">
-                     <div class="profile__name-header">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button type="button" class="profile__edit-button"></button> 
-                     </div>
-                     <p class="profile__job">Исследователь океана</p>
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+   <title>Место</title>
+</head>
+
+<body>
+   <div class="page">
+      <header class="header">
+         <div class="header__logo"></div>
+      </header>
+      <main class="content">
+         <section class="profile">
+            <div class="profile__main-info">
+               <div class="profile__img-conteiner">
+                  <img class="profile__avatar" src='' alt="аватар">
+                  <button type ="button" class="profile__avatar-button " alt="ручка"></button>
+                </div>
+               <div class="profile__info">
+                  <div class="profile__name-header">
+                     <h1 class="profile__name"></h1>
+                     <button type="button" class="profile__edit-button"></button>
                   </div>
+                  <p class="profile__job"></p>
                </div>
-               <button type="button" aria-label="добавить" class="profile__add-button"></button> 
-            </section>
-            <section class="photo-grid">
-               
-            </section>
-         </main>
-         <footer class="footer">
-            <p class="footer__copyright">&copy; 2021, Mesto Russia</p>
-         </footer>
+            </div>
+            <button type="button" aria-label="добавить" class="profile__add-button"></button>
+         </section>
+         <section class="photo-grid">
+
+         </section>
+      </main>
+      <footer class="footer">
+         <p class="footer__copyright">&copy; 2021, Mesto Russia</p>
+      </footer>
+   </div>
+   <div class="popup popup_edit">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+         <button type="button" class="popup__close-container"></button>
+         <h2 class="popup__title">Редактировать профиль</h2>
+         <form class='popup__form popup__form-edit' id="edit-form" action="#" name="form">
+            <fieldset class="popup__fieldset">
+               <input class="popup__input popup__input_name_name" id="name-input" type="text" maxlength="40"
+                  minlength="2" name="inputFormName" placeholder="Ваше Имя" required>
+               <span class="popup__error" id="name-input-error"></span>
+               <input class="popup__input popup__input_name_job" id="job-input" type="text" maxlength="200"
+                  minlength="2" name="inputFormAddition" placeholder="Чем Вы занимаетесь" required>
+               <span class="popup__error" id="job-input-error"></span>
+               <button type="submit" class="popup__save">Сохранить</button>
+            </fieldset>
+         </form>
       </div>
-      <div class="popup popup_edit">
-         <div class="popup__overlay"></div>
-         <div class="popup__container">
-            <button type="button" class="popup__close-container"></button>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <form class='popup__form popup__form-edit' id="edit-form" action="#" name="form">
-               <fieldset class="popup__fieldset">
-                  <input class="popup__input popup__input_name_name" id="name-input" type="text" maxlength="40" minlength="2" name="inputFormName"  placeholder="Ваше Имя" required>
-                  <span class="popup__error" id="name-input-error"></span>
-                  <input class="popup__input popup__input_name_job" id="job-input"type="text" maxlength="200" minlength="2" name="inputFormAddition"  placeholder="Чем Вы занимаетесь" required>
-                  <span class="popup__error" id="job-input-error"></span>
-                  <button  type="submit" class="popup__save" >Сохранить</button>
-               </fieldset>
-            </form>
-         </div>
+   </div>
+   <div class="popup popup_add">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+         <button type="button" class="popup__close-container"></button>
+         <h2 class="popup__title">Новое место</h2>
+         <form class="popup__form popup__form_add" action="#" name="form">
+            <fieldset class="popup__fieldset">
+               <input class="popup__input popup__input_type_name" id="card-input" name="inputFormName" type="text"
+                  maxlength="30" minlength="2" placeholder="Место" required>
+               <span class="popup__error" id="card-input-error"></span>
+               <input class="popup__input popup__input_type_link" id="link-input" name="inputFormAddition" type="url"
+                  placeholder="Ссылка" required>
+               <span class="popup__error" id="link-input-error"></span>
+               <button type="submit" class="popup__save">Сохранить</button>
+            </fieldset>
+         </form>
       </div>
-      <div class="popup popup_add">
-         <div class="popup__overlay"></div>
-         <div class="popup__container">
-            <button type="button" class="popup__close-container"></button>
-            <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form popup__form_add" action="#" name="form">
-               <fieldset class="popup__fieldset">
-                  <input class="popup__input popup__input_type_name" id="card-input" name="inputFormName" type="text" maxlength="30" minlength="2" placeholder="Место" required>
-                  <span class="popup__error" id="card-input-error"></span>
-                  <input class="popup__input popup__input_type_link" id="link-input" name="inputFormAddition" type="url"  placeholder="Ссылка" required>
-                  <span class="popup__error" id="link-input-error"></span>
-                  <button  type="submit" class="popup__save" >Сохранить</button>
-               </fieldset>
-            </form>
-         </div>
+   </div>
+   <div class="popup popup_avatar">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+         <button type="button" class="popup__close-container"></button>
+         <h2 class="popup__title">Обновить аватар</h2>
+         <form class="popup__form popup__form_avatar" action="#" name="form">
+            <fieldset class="popup__fieldset">
+               <input class="popup__input popup__input_type_link popup__input_type_avatar" id="avatar-input" name="inputFormAddition" type="url"
+                  placeholder="Ссылка" required>
+               <span class="popup__error" id="avatar-input-error"></span>
+               <button type="submit" class="popup__save">Сохранить</button>
+            </fieldset>
+         </form>
       </div>
-      <div class="popup popup_photo">
-         <div class="popup__overlay"></div>
-         <div class="popup__slider">
-            <button type="button" class="popup__close-container"></button>
-            <img  class="popup__img" src="#" alt="">
-            <p class="popup__text"></p>
-         </div>
+   </div>
+   <div class="popup popup_delete">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+         <button type="button" class="popup__close-container"></button>
+         <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
+         <form class="popup__form popup__form_add" action="#" name="form">
+            <fieldset class="popup__fieldset">
+               <button type="submit" class="popup__save">Да</button>
+            </fieldset>
+         </form>
       </div>
-      <template class="template" id="card-template">
-         <div class="photo-container">
+   </div>
+   <div class="popup popup_photo">
+      <div class="popup__overlay"></div>
+      <div class="popup__slider">
+         <button type="button" class="popup__close-container"></button>
+         <img class="popup__img" src="#" alt="">
+         <p class="popup__text"></p>
+      </div>
+   </div>
+   <template class="template" id="card-template">
+      <div class="photo-container">
          <img class="photo-container__img" src="#" alt="#">
-         <h2 class="photo-container__text"></h2>
-         <button type="button" class="photo-container__like"></button> 
-         <button type="button" class="photo-container__dlt"></button>
+         <div class="photo-container__elements">
+            <h2 class="photo-container__text"></h2>
+            <div class="photo-container__like-info">
+               <button type="button" class="photo-container__like"></button>
+               <span class="photo-container__like_count"></span>
+            </div>
          </div>
-      </template>
-       
-      </body>
+         <button type="button" class="photo-container__dlt"></button>
+      </div>
+   </template>
+   
+</body>
+
 </html>
