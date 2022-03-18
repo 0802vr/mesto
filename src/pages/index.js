@@ -1,4 +1,4 @@
-import './index.css'; 
+ 
 import { Section } from "../script/components/Section.js"
 import { Card } from "../script/components/Card.js"
 import { FormValidator } from "../script/components/FormValidator.js"
@@ -9,25 +9,27 @@ import { editButton, addButton, popupEdit, profileForm, popupAdd, formAdd, cardL
 import { Api } from "../script/components/Api.js"
 
 let userId
-
 const api = new Api({ baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37', headers: { authorization: '02137663-47a8-479f-86ad-354889aa2dd3', 'Content-Type': 'application/json' } })
-api.getUserInfo()
-  .then(res => {
-     
-    unfoValueUser.setUserInfo(res.name, res.about, res.avatar)
-    userId = res._id
-  })
-api.getInitialCards()
-  .then(checklist => {
-    checklist.forEach(date => {
-      const card = createCard({ name: date.name, link: date.link, likes: date.likes, id: date._id, userId: userId, ownerId: date.owner._id })
-      section.addItems(card)
-    })
 
-  })
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([date, cards]) => {
+   // console.log(  )
+    userId = date._id
+   // console.log( cards.owner._id ) // тут установка данных пользователя
+    unfoValueUser.setUserInfo(date.name, date.about, date.avatar)  // и тут отрисовка карточек
+    section.renderItems(cards, userId);
+       
+    })
+  
+  .catch(err => {
+    console.log(err);// тут ловим ошибку
+  });
+  
+ 
 
 //работа с Card
 function createCard(date) {
+ // console.log(date)
   const card = new Card(
     date,
     cardTemplateSelector,
@@ -41,6 +43,7 @@ function createCard(date) {
           .then(res => {
 
             card.deleteCard()
+            cardDelete.close()
           })
           .catch((err) => {
             console.log(err);
@@ -54,11 +57,17 @@ function createCard(date) {
         .then(res => {
           card.setLikes(res.likes)
         })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        })
       }
       else {
         api.addLike(id)
         .then(res => {
           card.setLikes(res.likes)
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
         })
       }
 
@@ -70,28 +79,37 @@ function createCard(date) {
 }
 //ф-я сохранения карты
 const saveAddCard = (date) => {
-  cardMod.getButtonText('Сохранение...');
+  cardMod.setButtonText('Сохранение...');
   api.addCard({ name: date.inputFormName, link: date.inputFormAddition })
     .then(res => {
+      console.log(res)
       const card = createCard({ name: res.name, link: res.link, likes: res.likes, id: res._id, userId: userId, ownerId: res.owner._id });
-      section.addItems(card);
+      section.addItems(card, date._userId);
+      cardMod.close();
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
     })
     .finally(() =>{
-      cardMod.getButtonText('Сохранить');
+      cardMod.setButtonText('Сохранить');
     });
 
 }
 
 //ф-я сохранения нового профиля
 function saveProfile(element) {
-  profileMod.getButtonText('Сохранение...');
+  profileMod.setButtonText('Сохранение...');
   const { inputFormName, inputFormAddition } = element
   api.editProfile(inputFormName, inputFormAddition)
     .then(res => {
-      unfoValueUser.setUserInfo(res.name, res.about)
+      unfoValueUser.setUserInfo(res.name, res.about, res.avatar)
+      profileMod.close();
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
     })
     .finally(() =>{
-      profileMod.getButtonText('Сохранить');
+      profileMod.setButtonText('Сохранить');
     });
 }
 //ф-я открыть форму профиля
@@ -108,21 +126,24 @@ function openAddProfile() {
 }
 function openAvatarProfile(){
   avatarFormValidator.resetValidForm();
-  inputAvatar.value = unfoValueUser.getUserInfo().userAvatar; 
+    
   avatarMod.open();
 
 }
 function saveAvatarProfile(element){
-  avatarMod.getButtonText('Сохранение...');
+  avatarMod.setButtonText('Сохранение...');
   const { inputFormAddition } = element
   api.addAvatar({avatar:inputFormAddition})
   .then((res) => {
-    console.log(res)
+  //  console.log(res)
    unfoValueUser.setUserInfo( res.name, res.about, res.avatar);
-    
+    avatarMod.close();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
   })
   .finally(() =>{   
-    avatarMod.getButtonText('Сохранить');
+    avatarMod.setButtonText('Сохранить');
   });
 }
 
@@ -159,7 +180,7 @@ cardMod.setEventListeners();
 popupBigImage.setEventListeners();
 cardDelete.setEventListeners();
 avatarMod.setEventListeners();
-section.renderItems();
+//section.renderItems();
 
 
 

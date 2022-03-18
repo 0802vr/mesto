@@ -32,22 +32,24 @@ export class Card {
 
     this._element = this._getTemplate();
     this._elementImage = this._element.querySelector(".photo-container__img");
-
+    this._elementLike = this._element.querySelector(".photo-container__like");
+    this._elementDlt = this._element.querySelector(".photo-container__dlt");
+    this._likeCountElement = this._element.querySelector('.photo-container__like_count');
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
     this._element.querySelector(".photo-container__text").textContent = this._name;
     this._setEventListeners()//место для ф-и лайка удаления просмотра фото
     this.setLikes(this._likes)
     if (this._ownerId !== this._userId) {
-      this._element.querySelector(".photo-container__dlt").style.display = 'none'
+      this._elementDlt.style.display = 'none'
     }
 
     return this._element;
   }
   _setEventListeners() {
-    this._element.querySelector(".photo-container__like").addEventListener('click', () => { this._handleLikeClick(this._id) });
-    this._element.querySelector(".photo-container__dlt").addEventListener('click', () => { this._handleDeleteClick(this._id) });
-    this._element.querySelector('.photo-container__img').addEventListener('click', () => { this._handleImageClick() });
+    this._elementLike.addEventListener('click', () => { this._handleLikeClick(this._id) });
+    this._elementDlt.addEventListener('click', () => { this._handleDeleteClick(this._id) });
+    this._elementImage.addEventListener('click', () => { this._handleImageClick() });
   }
 
 
@@ -74,18 +76,18 @@ export class Card {
     return userList
  } 
 
-_fillCard() { 
-  this._element.querySelector(".photo-container__like").classList.add('photo-container__like_active') }
+_likeCard() { 
+  this._elementLike.classList.add('photo-container__like_active') }
 
-_resetCard() { this._element.querySelector(".photo-container__like").classList.remove('photo-container__like_active') }
+  _dislikeCard() {  this._elementLike.classList.remove('photo-container__like_active') }
 
 setLikes(newLikes) {
   this._likes = newLikes
-  const likeCountElement = this._element.querySelector('.photo-container__like_count');
-  likeCountElement.textContent = this._likes.length;
+  
+  this._likeCountElement.textContent = this._likes.length;
 
-  if (this.isLiked()) { this._fillCard() }
-  else { this._resetCard() }
+  if (this.isLiked()) { this._likeCard() }
+  else { this._dislikeCard() }
 }
 
 

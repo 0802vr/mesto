@@ -1,18 +1,19 @@
 export class Section {
-    constructor({items,renders}, conteiner) {
+    constructor({items,renders}, container) {
         this._items = items;
         this._renders = renders;
-        this._conteiner = conteiner;
+        this._container = container;
     }
 
   //функция добавления в dom
   addItems(card) {
-    this._conteiner.prepend((card))
+    this._container.prepend((card))
     }
 //функция обхода исходного массива и добавления на страницу
-  renderItems() { 
-    this._items.forEach((data) => {
-        this.addItems(this._renders(data))})    
-    }  
+renderItems(items, userId){
+  items.forEach(date => {
+      this._container.append(this._renders({ name: date.name, link: date.link, likes: date.likes, id: date._id, userId: userId, ownerId: date.owner._id }));    
+  });   }
+   
        
 } 
