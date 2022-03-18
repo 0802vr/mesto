@@ -82,7 +82,7 @@ const saveAddCard = (date) => {
   cardMod.setButtonText('Сохранение...');
   api.addCard({ name: date.inputFormName, link: date.inputFormAddition })
     .then(res => {
-      console.log(res)
+       
       const card = createCard({ name: res.name, link: res.link, likes: res.likes, id: res._id, userId: userId, ownerId: res.owner._id });
       section.addItems(card, date._userId);
       cardMod.close();
